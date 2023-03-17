@@ -1,11 +1,15 @@
-const { connectConfig } = require("./ssh/sshconfig");
 const {UploadDir} = require("./ssh/ssh");
 class SFTPPlugin {
+
+	constructor(initialData) {
+		this.config = initialData.config;
+        this.to = initialData.to;
+	}
+
 	apply(compiler) {
 		compiler.hooks.afterEmit.tapAsync("sftp", (compilation,next) => {
 			try {
-				const serverPath = "********"
-				UploadDir(connectConfig,compiler.options.output.path,serverPath,function(err){
+				UploadDir(this.config,compiler.options.output.path,this.to,function(err){
 					if(err) throw err;
 					next();
 				});

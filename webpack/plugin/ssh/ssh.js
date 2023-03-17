@@ -88,13 +88,17 @@ function generateList(packingPath,dirList,fileList) {
 		}
 	}
 }
+
 function UploadDir(config,packingPath,serverPath,callback) {
 	const dirList = []
 	const fileList = []
 	generateList(packingPath,dirList,fileList);
+	console.log(dirList,fileList)
 	dirList.forEach(function(dir,index) {
 		dirList.splice(index,1,function(next) {
+			console.log(serverPath)
 			let target = path.join(serverPath,dir.slice(packingPath.length+1));
+			console.log(target)
 			let command = `mkdir -p ${target}\nexit\n`;
 			DoShell(config,command,next);
 		})

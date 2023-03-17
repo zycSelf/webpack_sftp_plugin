@@ -1,0 +1,2 @@
+# webpack_sftp_plugin
+webpack_sftp_plugin
